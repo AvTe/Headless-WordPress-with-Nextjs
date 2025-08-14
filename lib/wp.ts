@@ -1038,12 +1038,86 @@ export function getAPIUrl(): string {
  * Fetch multiple post types in parallel
  */
 export async function getMultipleContent(options: {
-  posts?: { perPage?: number; categories?: number[] };
-  pages?: { perPage?: number };
-  categories?: { perPage?: number };
-  tags?: { perPage?: number };
-  media?: { perPage?: number };
-  users?: { perPage?: number };
+  posts?: {
+    perPage?: number;
+    page?: number;
+    search?: string;
+    author?: number;
+    categories?: number[];
+    tags?: number[];
+    status?: string;
+    orderby?: string;
+    order?: 'asc' | 'desc';
+    after?: string;
+    before?: string;
+    include?: number[];
+    exclude?: number[];
+    slug?: string[];
+    sticky?: boolean;
+  };
+  pages?: {
+    perPage?: number;
+    page?: number;
+    search?: string;
+    author?: number;
+    parent?: number;
+    orderby?: string;
+    order?: 'asc' | 'desc';
+    status?: string;
+    include?: number[];
+    exclude?: number[];
+    slug?: string[];
+  };
+  categories?: {
+    perPage?: number;
+    page?: number;
+    search?: string;
+    parent?: number;
+    orderby?: string;
+    order?: 'asc' | 'desc';
+    hide_empty?: boolean;
+    include?: number[];
+    exclude?: number[];
+    slug?: string[];
+  };
+  tags?: {
+    perPage?: number;
+    page?: number;
+    search?: string;
+    orderby?: string;
+    order?: 'asc' | 'desc';
+    hide_empty?: boolean;
+    include?: number[];
+    exclude?: number[];
+    slug?: string[];
+  };
+  media?: {
+    perPage?: number;
+    page?: number;
+    search?: string;
+    author?: number;
+    parent?: number;
+    media_type?: 'image' | 'video' | 'audio' | 'application';
+    mime_type?: string;
+    orderby?: string;
+    order?: 'asc' | 'desc';
+    include?: number[];
+    exclude?: number[];
+  };
+  users?: {
+    perPage?: number;
+    page?: number;
+    search?: string;
+    orderby?: string;
+    order?: 'asc' | 'desc';
+    include?: number[];
+    exclude?: number[];
+    slug?: string[];
+    roles?: string[];
+    capabilities?: string[];
+    who?: string;
+    has_published_posts?: string[] | boolean;
+  };
 }) {
   const requests: Promise<any>[] = [];
   const results: any = {};
