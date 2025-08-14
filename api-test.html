@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WordPress API Test</title>
+</head>
+<body>
+    <h1>WordPress API Connection Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8884';
+        const resultsDiv = document.getElementById('results');
+        
+        async function testAPI() {
+            const tests = [
+                { name: 'Basic API', url: `${API_BASE}/wp-json/wp/v2` },
+                { name: 'Posts Endpoint', url: `${API_BASE}/wp-json/wp/v2/posts` },
+                { name: 'Posts with Fields', url: `${API_BASE}/wp-json/wp/v2/posts?_fields=id,slug,title,excerpt,content,date&per_page=10` }
+            ];
+            
+            for (const test of tests) {
+                try {
+                    resultsDiv.innerHTML += `<h3>Testing: ${test.name}</h3>`;
+                    resultsDiv.innerHTML += `<p>URL: <a href="${test.url}" target="_blank">${test.url}</a></p>`;
+                    
+                    const response = await fetch(test.url);
+                    const contentType = response.headers.get('content-type');
+                    const text = await response.text();
+                    
+                    resultsDiv.innerHTML += `<p><strong>Status:</strong> ${response.status}</p>`;
+                    resultsDiv.innerHTML += `<p><strong>Content-Type:</strong> ${contentType}</p>`;
+                    
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = JSON.parse(text);
+                        resultsDiv.innerHTML += `<p><strong>Result:</strong> ✅ Valid JSON with ${Array.isArray(data) ? data.length : 1} item(s)</p>`;
+                        resultsDiv.innerHTML += `<pre style="background:#f0f0f0;padding:10px;max-height:200px;overflow:auto;">${JSON.stringify(data, null, 2).substring(0, 500)}...</pre>`;
+                    } else {
+                        resultsDiv.innerHTML += `<p><strong>Result:</strong> ❌ Not JSON (probably HTML)</p>`;
+                        resultsDiv.innerHTML += `<pre style="background:#ffe6e6;padding:10px;max-height:200px;overflow:auto;">${text.substring(0, 500)}...</pre>`;
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML += `<p><strong>Error:</strong> ❌ ${error.message}</p>`;
+                }
+                resultsDiv.innerHTML += '<hr>';
+            }
+        }
+        
+        // Run tests when page loads
+        testAPI();
+    </script>
+</body>
+</html>
