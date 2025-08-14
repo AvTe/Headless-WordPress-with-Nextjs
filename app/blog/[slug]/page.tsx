@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import ShareButtons from '@/components/ShareButtons';
+import ReadingProgress from '@/components/ReadingProgress';
+import TableOfContents from '@/components/TableOfContents';
+import CommentsSection from '@/components/CommentsSection';
 import './post-content.css';
 
 interface PostPageProps {
@@ -143,7 +146,13 @@ export default async function PostPage({ params }: PostPageProps) {
   const readingTime = calculateReadingTime(post.content.rendered);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Reading Progress */}
+      <ReadingProgress />
+      
+      {/* Table of Contents */}
+      <TableOfContents />
+      
       {/* Hero Section with Featured Image */}
       <div className="relative h-[60vh] overflow-hidden">
         {featuredImageUrl ? (
@@ -256,14 +265,17 @@ export default async function PostPage({ params }: PostPageProps) {
             </article>
 
             {/* Share Section */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Share this article</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 mb-8">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Share this article</h3>
               <div className="flex flex-wrap items-center gap-4">
                 <Suspense fallback={<div>Loading share buttons...</div>}>
                   <ShareButtons post={post} featuredImageUrl={featuredImageUrl || undefined} />
                 </Suspense>
               </div>
             </div>
+
+            {/* Comments Section */}
+            <CommentsSection post={post} />
           </div>
 
           {/* Sidebar */}

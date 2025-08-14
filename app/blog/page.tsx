@@ -88,13 +88,13 @@ async function RegularPostCard({ post, index }: { post: WPPost; index: number })
           
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-gray-900 mb-2 text-lg md:text-xl line-clamp-2 group-hover:text-blue-600 transition-colors">
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-lg md:text-xl line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
             </h3>
-            <div className="text-gray-600 mb-3 line-clamp-2 text-sm md:text-base">
+            <div className="text-gray-600 dark:text-gray-300 mb-3 line-clamp-2 text-sm md:text-base">
               <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
             </div>
-            <div className="flex items-center text-xs md:text-sm text-gray-500">
+            <div className="flex items-center text-xs md:text-sm text-gray-500 dark:text-gray-400">
               <time>{formatDate(post.date)}</time>
               <span className="mx-2">•</span>
               <span>3 min read</span>
@@ -135,13 +135,13 @@ async function GridPostCard({ post }: { post: WPPost }) {
           
           {/* Content */}
           <div className="space-y-3">
-            <h3 className="font-bold text-gray-900 text-lg line-clamp-2 group-hover:text-blue-600 transition-colors">
+            <h3 className="font-bold text-gray-900 dark:text-white text-lg line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
             </h3>
-            <div className="text-gray-600 line-clamp-3 text-sm">
+            <div className="text-gray-600 dark:text-gray-300 line-clamp-3 text-sm">
               <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
             </div>
-            <div className="flex items-center text-xs text-gray-500">
+            <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
               <time>{formatDate(post.date)}</time>
               <span className="mx-2">•</span>
               <span>4 min read</span>
@@ -173,9 +173,9 @@ export default async function BlogPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Connection Error</h1>
-          <p className="text-gray-600 mb-6">{error}</p>
-          <p className="text-sm text-gray-500">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Connection Error</h1>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Make sure WordPress Studio is running on http://localhost:8884
           </p>
         </div>
@@ -192,8 +192,8 @@ export default async function BlogPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">No Posts Found</h1>
-          <p className="text-gray-600">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">No Posts Found</h1>
+          <p className="text-gray-600 dark:text-gray-300">
             No blog posts are available yet. Create some posts in your WordPress admin.
           </p>
         </div>
@@ -213,15 +213,15 @@ export default async function BlogPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Our Blog
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Discover insights, tutorials, and stories from our team
             </p>
           </div>
@@ -243,10 +243,10 @@ export default async function BlogPage() {
             {/* Recent Posts List */}
             {listPosts.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-8">Latest Posts</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Latest Posts</h2>
                 <div className="space-y-6">
                   {listPosts.map((post, index) => (
-                    <div key={post.id} className="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+                    <div key={post.id} className="border-b border-gray-100 dark:border-gray-700 pb-6 last:border-b-0 last:pb-0">
                       <RegularPostCard post={post} index={index} />
                     </div>
                   ))}
@@ -258,16 +258,16 @@ export default async function BlogPage() {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Search */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Search</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Search</h3>
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Search posts..."
-                  className="w-full pl-4 pr-10 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-4 pr-10 py-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
@@ -284,7 +284,7 @@ export default async function BlogPage() {
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="w-full px-4 py-3 rounded-xl text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                  className="w-full px-4 py-3 rounded-xl text-gray-900 placeholder-gray-500 bg-white/90 backdrop-blur focus:ring-2 focus:ring-white focus:ring-opacity-50"
                 />
                 <button className="w-full bg-white text-blue-600 font-semibold py-3 rounded-xl hover:bg-gray-50 transition-colors">
                   Subscribe
@@ -293,8 +293,8 @@ export default async function BlogPage() {
             </div>
 
             {/* Popular Posts */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Posts</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Popular Posts</h3>
               <div className="space-y-4">
                 {posts.slice(0, 3).map((post, index) => (
                   <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
@@ -303,10 +303,10 @@ export default async function BlogPage() {
                         {index + 1}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h4 className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
                           <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                         </h4>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                           {formatDate(post.date)}
                         </p>
                       </div>
@@ -321,7 +321,7 @@ export default async function BlogPage() {
         {/* Grid Posts */}
         {gridPosts.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">More Articles</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">More Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {gridPosts.map((post) => (
                 <GridPostCard key={post.id} post={post} />
@@ -332,7 +332,7 @@ export default async function BlogPage() {
 
         {/* Load More */}
         <div className="mt-12 text-center">
-          <button className="inline-flex items-center px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+          <button className="inline-flex items-center px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-sm transition-all">
             Load More Posts
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
